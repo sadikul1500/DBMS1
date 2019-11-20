@@ -1,0 +1,60 @@
+	drop table low;
+	drop table high;
+	drop table med;
+	create table low
+	(
+ 		Lid varchar(200),
+ 		Lsalary number,
+ 		CONSTRAINT low_Lid_PK PRIMARY KEY(Lid)	
+	); 
+	create table high
+	(
+ 		Hid varchar(200),
+ 		Hsalary number,
+ 		CONSTRAINT high_Hid_PK PRIMARY KEY(Hid)	
+	);
+	create table med
+	(
+ 		Mid varchar(200),
+ 		Msalary number,
+ 		CONSTRAINT med_Med_PK PRIMARY KEY(Mid)	
+	);
+
+
+	/* CREATE OR REPLACE FUNCTION insert_employee
+ 	(p_id employees.employee_id%TYPE) RETURN NUMBER IS
+  	sal number := 0;
+	BEGIN
+
+  	SELECT salary into sal
+ 	from employees
+	where employee_id=p_id;
+  	
+	IF 10000 > sal
+	THEN
+	insert into low(Lid, Lsalary) values(p_id,sal);
+	DBMS_OUTPUT.PUT_LINE('Low table');
+	return sal;
+	END IF;	
+
+	IF 20000 > sal
+	THEN
+	insert into mid(Mid, Msalary) values(p_id,sal);
+	DBMS_OUTPUT.PUT_LINE('Mid table');
+	return sal;
+	END IF;
+
+	IF 20000 <= sal
+	THEN
+	insert into high(Hid, Hsalary) values(p_id,sal);
+	DBMS_OUTPUT.PUT_LINE('high table');
+	return sal;
+	END IF;
+
+	END insert_employee; 
+	/
+
+	*/
+
+
+	

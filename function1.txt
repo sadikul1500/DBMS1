@@ -1,0 +1,5 @@
+set severoutput on;
+
+create or replace function get_sal
+(p_id employees.employee_id%type,
+p_sal employees.salary%type) is return 

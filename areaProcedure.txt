@@ -1,0 +1,22 @@
+set serveroutput on;
+
+create or replace procedure cir_area
+(r in number,
+area out number)
+is begin
+
+
+	area := 3.1416*r*r;
+
+end cir_area;
+/
+
+declare
+	r number :=3;
+	ar number;
+begin
+	cir_area(r, ar);
+	dbms_output.put_line(ar);
+
+end;
+/

@@ -1,0 +1,6 @@
+--select customer_name, borrower.loan_number, amount from borrower,loan where borrower.loan_number=loan.loan_number and branch_name='Perryridge';
+--select borrower.customer_name,amount,loan.branch_name,depositor.account_number,loan.loan_number,balance,amount from loan, account, depositor, borrower 
+--where loan.loan_number=borrower.loan_number and depositor.customer_name=borrower.customer_name and account.account_number=depositor.account_number;
+select  borrower.customer_name,sum(balance),sum(amount) from loan, account, depositor, borrower 
+where loan.loan_number=borrower.loan_number and depositor.customer_name=borrower.customer_name and account.account_number=depositor.account_number
+group by borrower.customer_name;

@@ -1,0 +1,43 @@
+set serveroutput on;
+
+CREATE OR REPLACE FUNCTION calcSal (id employees.employee_id%type) RETURN NUMBER AS
+    sal  NUMBER := 0;
+    name varchar(200);
+BEGIN
+    SELECT salary
+    INTO sal from employees
+    WHERE employee_id=id;
+
+SELECT first_name
+    INTO name from employees
+    WHERE employee_id=id;
+
+IF sal<3000
+THEN
+Insert into low(l_employee_id, l_salary) values (name, sal);
+RETURN sal;
+END IF;
+
+IF sal<6000
+THEN
+Insert into medium(m_employee_id, m_salary) values (name, sal);
+RETURN sal;
+END IF;
+
+
+Insert into high(h_employee_id, h_salary) values (name, sal);
+RETURN sal;
+
+END calcSal;
+/
+
+--select caclSal(110) from employees;
+
+/*
+declare
+  x number;
+begin
+  x := calcSal(110);
+end;
+/	
+*/

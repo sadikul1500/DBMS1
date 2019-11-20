@@ -1,0 +1,82 @@
+/*
+set serveroutput on;
+create or replace procedure srea
+(r number, ar out number)
+is begin
+
+select 3.1416*r*r into ar from dual;
+end srea;
+/
+
+declare
+x number:=0;
+r number:=10;
+begin
+srea(r,x);
+dbms_output.put_line(x);
+end;
+/
+*/ 
+set serveroutput on;
+
+drop table high;
+drop table medium;
+drop table low;
+
+create table high
+(
+	h_employee_id number,
+	h_salary number,
+	constraint hs_employee_id_pk primary key(h_employee_id)
+);
+
+create table medium
+(
+	m_employee_id number,
+	m_salary number,
+	constraint ms_employee_id_pk primary key(m_employee_id)
+);
+
+create table low
+(
+	l_employee_id number,
+	l_salary number,
+	constraint ls_employee_id_pk primary key(l_employee_id)
+);
+
+create or replace function ins
+(pid employees.employee_id%type) return number as sal number :=0;
+emp_name employees.first_name%type;
+begin
+	select first_name,salary into emp_name,sal from employees where employee_id=pid;
+	if 10000>sal
+	then
+	insert into low values(emp_name,sal);
+	dbms_output.put_line('low table');
+	return sal;
+	end if;
+	
+	if 20000>sal
+	then
+	insert into medium values(emp_name,sal);
+	dbms_output.put_line('medium table');
+	return sal;
+	end if;
+	
+	if 20000<=sal
+	then
+	insert into high values(emp_name,sal);
+	dbms_output.put_line('high table');
+	return sal;
+	end if;
+	
+end ins;
+/
+
+declare
+  x number;
+begin
+  x := ins(110);
+  DBMS_OUTPUT.PUT_LINE(x);
+end;
+/

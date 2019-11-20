@@ -1,0 +1,8 @@
+declare
+area number(6,2);
+radius number(1) := 1;
+begin
+area := 3.1416 * radius * radius;
+dbms_output.put_line('area is ' || area);
+end;
+/

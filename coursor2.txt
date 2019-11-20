@@ -1,0 +1,31 @@
+set serveroutput on;
+set linesize 7000;
+DECLARE
+			CURSOR c_zip IS
+			SELECT *
+			FROM employees;
+			vr c_zip%ROWTYPE;
+			i number;
+BEGIN
+			OPEN c_zip;
+			--DBMS_OUTPUT.PUT_LINE(1003);
+			FETCH c_zip INTO vr;
+			while c_zip%found
+				LOOP
+					
+					--EXIT WHEN c_zip%NOTFOUND;
+				
+				
+				
+					i:= 12*vr.salary+12*vr.salary*NVL(vr.commission_pct,0);
+					insert into low values(vr.last_name, vr.employee_id, vr.salary, i);
+					--DBMS_OUTPUT.PUT_LINE(1003);
+					FETCH c_zip INTO vr;
+					
+				END LOOP;
+				
+				close c_zip;
+END;
+/
+
+

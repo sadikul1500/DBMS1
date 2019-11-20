@@ -1,0 +1,8 @@
+create or replace function get_area
+(radius number) return number is
+area  number := 0;
+begin
+area := 3.1416*radius*radius;
+return area;
+end get_area;
+/

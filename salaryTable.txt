@@ -1,0 +1,24 @@
+drop table high;
+drop table medium;
+drop table low;
+
+create table high
+(
+	h_employee_id number,
+	h_salary number,
+	constraint hs_employee_id_pk primary key(h_employee_id)
+);
+
+create table medium
+(
+	m_employee_id number,
+	m_salary number,
+	constraint ms_employee_id_pk primary key(m_employee_id)
+);
+
+create table low
+(
+	l_employee_id number,
+	l_salary number,
+	constraint ls_employee_id_pk primary key(l_employee_id)
+);

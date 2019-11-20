@@ -1,0 +1,11 @@
+create or replace function annual_salary
+(pid employees.employee_id%type) return number is
+anual_sal employees.salary%type :=0;
+begin
+select (salary + salary*nvl(employees.commission_pct, 0))*12
+into anual_sal
+from employees
+where employee_id = pid ;
+return anual_sal;
+end annual_salary;
+/

@@ -1,0 +1,33 @@
+--set serveroutput on;
+/*DECLARE
+	vr_employe employees%ROWTYPE;
+BEGIN
+	SELECT *
+	INTO vr_employe
+	FROM employees
+	WHERE  employee_id = 156;
+	DBMS_OUTPUT.PUT_LINE (vr_employe.last_name ||' '|| vr_employe.salary*12);
+EXCEPTION
+	WHEN no_data_found
+	THEN
+	DBMS_OUTPUT.PUT_LINE(1000011);
+END;
+/
+*/
+
+/*
+set serveroutput on;
+
+declare
+	vr employees%ROWTYPE;
+	id number;
+	i number;
+BEGIN
+	id:=&id;
+	select * into vr from employees 
+	where employee_id = id;
+	i:= 12*vr.salary+12*vr.salary*NVL(vr.commission_pct,0);
+	insert into low values(vr.last_name, vr.employee_id, vr.salary, i);
+END;
+/
+*/

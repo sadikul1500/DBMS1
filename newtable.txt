@@ -1,0 +1,17 @@
+drop table low;
+create table low
+	(
+ 		Lname varchar(20),
+		Lid varchar(20),
+ 		dept varchar(30),		
+ 		CONSTRAINT low_Lid_PK PRIMARY KEY(Lid)
+	); 
+	
+	
+/*
+Lname varchar(20),
+		Lid varchar(20),
+ 		Lsalary number,
+		Asalary number,		
+ 		CONSTRAINT low_Lid_PK PRIMARY KEY(Lid)
+		*/

@@ -1,0 +1,125 @@
+drop table Borrower;
+drop table Depositor;
+drop table Loan;
+drop table Account;
+drop table Customer;
+drop table Branch;
+
+create table Branch
+(
+	branch_name varchar(80),
+	branch_city varchar(200),
+	asset number,
+	constraint branch_name_pk primary key(branch_name)
+);
+
+insert into Branch(branch_name, branch_city, asset) values('Perryridge', 'Horseneck', 1700000);
+insert into Branch(branch_name, branch_city, asset) values('Pownal', 'Bennington', 300000);
+insert into Branch(branch_name, branch_city, asset) values('Redwood', 'Palo Alto', 2100000);
+insert into Branch(branch_name, branch_city, asset) values('Round Hill', 'Horseneck', 8000000);
+insert into Branch(branch_name, branch_city, asset) values('Brighton', 'Brooklyn', 7100000);
+insert into Branch(branch_name, branch_city, asset) values('Downtown', 'Brooklyn', 9000000);
+insert into Branch(branch_name, branch_city, asset) values('Mianus', 'Horseneck', 400000);
+insert into Branch(branch_name, branch_city, asset) values('North Town', 'Rye', 3700000);
+ 
+
+create table Customer
+(
+	customer_name varchar(20),
+	customer_street varchar(50),
+	customer_city varchar(100),
+	constraint customer_name_pk primary key(customer_name)
+);
+
+
+insert into Customer(customer_name,customer_street,customer_city)values('Johnson','Alma','Palo Alto');
+insert into Customer(customer_name,customer_street,customer_city)values('Jones','Main','Harrison');
+insert into Customer(customer_name,customer_street,customer_city)values('Lindsay','Park','pittsfield');
+insert into Customer(customer_name,customer_street,customer_city)values('Smith','North','Rye');
+insert into Customer(customer_name,customer_street,customer_city)values('Turner','Putnam','Stamford');
+insert into Customer(customer_name,customer_street,customer_city)values('Williams','Nassau','Princeton');
+insert into Customer(customer_name,customer_street,customer_city)values('Adams','Spring','Pittsfield');
+insert into Customer(customer_name,customer_street,customer_city)values('Brooks','Senator','Brooklyn');
+insert into Customer(customer_name,customer_street,customer_city)values('Curry','North','Rye');
+insert into Customer(customer_name,customer_street,customer_city)values('Glenn','Sand Hill','Woodside');
+insert into Customer(customer_name,customer_street,customer_city)values('Hayes','Main','Harrison');
+
+create table Account
+(
+	account_number varchar(20),
+	branch_name varchar(80),
+	balance number,
+	constraint account_number_pk primary key(account_number),
+	constraint branch_name_fk foreign key(branch_name)
+	references Branch(branch_name)
+);
+
+insert into Account(account_number, branch_name, balance) values('A-101', 'Downtown', 500);
+insert into Account(account_number, branch_name, balance) values('A-102', 'Perryridge', 400);
+insert into Account(account_number, branch_name, balance) values('A-201', 'Brighton', 900);
+insert into Account(account_number, branch_name, balance) values('A-215', 'Mianus', 700);
+insert into Account(account_number, branch_name, balance) values('A-217', 'Brighton', 750);
+insert into Account(account_number, branch_name, balance) values('A-222', 'Redwood', 700);
+insert into Account(account_number, branch_name, balance) values('A-305', 'Round Hill', 350);
+
+create table Loan
+(
+	loan_number varchar(20),
+	branch_name varchar(80),
+	amount number,
+	constraint loan_number_pk primary key(loan_number),
+	constraint Loan_branch_name_fk foreign key(branch_name)
+	references Branch(branch_name)
+);
+
+insert into loan(loan_number,branch_name, amount) values('L-11','Round Hill', 900);
+insert into loan(loan_number,branch_name, amount) values('L-14','Downtown', 1500);
+insert into loan(loan_number,branch_name, amount) values('L-15','Perryridge', 1500);
+insert into loan(loan_number,branch_name, amount) values('L-16','Perryridge', 1300);
+insert into loan(loan_number,branch_name, amount) values('L-17','Downtown', 1000);
+insert into loan(loan_number,branch_name, amount) values('L-23','Redwood', 2000);
+insert into loan(loan_number,branch_name, amount) values('L-93','Mianus', 500);
+
+create table Depositor
+(
+	account_number varchar(20),
+	customer_name varchar(80),
+	constraint table_account_number_fk foreign key(account_number)
+	references Account(account_number),
+	constraint table_customer_name_fk foreign key(customer_name)
+	references Customer(customer_name)	
+);
+
+insert into Depositor(customer_name, account_number) values('Hayes', 'A-102');
+insert into Depositor(customer_name, account_number) values('Johnson', 'A-101');
+insert into Depositor(customer_name, account_number) values('Johnson', 'A-201');
+insert into Depositor(customer_name, account_number) values('Jones', 'A-217');
+insert into Depositor(customer_name, account_number) values('Lindsay', 'A-222');
+insert into Depositor(customer_name, account_number) values('Smith', 'A-215');
+insert into Depositor(customer_name, account_number) values('Turner', 'A-305');
+
+create table Borrower
+(
+	loan_number varchar(20),
+	customer_name varchar(20),
+	constraint borrower_loan_number_fk foreign key(loan_number)
+	references Loan(loan_number),
+	constraint borrower_customer_name_fk foreign key(customer_name)
+	references Customer(customer_name)
+);
+
+insert into borrower(customer_name, loan_number) values('Adams', 'L-16');
+insert into borrower(customer_name, loan_number) values('Curry', 'L-93');
+insert into borrower(customer_name, loan_number) values('Hayes', 'L-15');
+insert into borrower(customer_name, loan_number) values('Johnson', 'L-14');
+insert into borrower(customer_name, loan_number) values('Jones', 'L-17');
+insert into borrower(customer_name, loan_number) values('Smith', 'L-11');
+insert into borrower(customer_name, loan_number) values('Smith', 'L-23');
+insert into borrower(customer_name, loan_number) values('Williams', 'L-17');
+
+
+select * from Borrower;
+select distinct customer_name from Depositor;
+
+
+

@@ -1,0 +1,25 @@
+set serveroutput on;
+
+create or replace procedure raise_salary
+(p_id in employees.employee_id%type,
+ p_name out employees.last_name%type,
+ p_salary out employees.salary%type)
+is begin
+
+select last_name, salary
+into p_name, p_salary
+from employees
+where employee_id = p_id;
+
+end raise_salary; 
+/
+
+declare
+v_sal employees.salary%type;
+v_name employees.last_name%type;
+begin
+raise_salary(101, v_name, v_sal);
+dbms_output.put_line(v_name ||'  '|| to_char(v_sal));
+end;
+/
+

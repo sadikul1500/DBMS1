@@ -1,0 +1,95 @@
+/*
+declare
+	x number:= 0;
+begin	
+	loop
+		dbms_output.put_line(x);
+		x := x+1;
+		exit when x = 101;
+	end loop;
+		
+end;
+/
+*/
+/*
+set serveroutput on;
+declare
+	x number:= 0;
+begin	
+	while x < 5
+		loop
+			dbms_output.put_line(x);
+		
+		x := x+1;
+		end loop;
+	
+		
+end;
+/
+*/
+
+
+
+
+
+
+
+
+/*
+set serveroutput on;
+declare
+	x number:= 0;
+	y number:= 1;
+	z number:= x+y;
+begin	
+	dbms_output.put_line(x);
+	dbms_output.put_line(y);
+	
+	for p in 0..12 
+		loop
+			dbms_output.put_line(z);
+		
+		x := y;
+		y := z;
+		z := x+y;
+		end loop;
+	
+		
+end;
+/
+*/
+
+set serveroutput on;
+declare
+	--x number:= 0;
+	--y number:= 1;
+	z number:= 7;
+begin	
+	--dbms_output.put_line(x);
+	--dbms_output.put_line(y);
+	
+	for p in 1..z 
+		loop
+			for k in 1..(z-p)
+				loop
+					dbms_output.put('* ');
+				end loop;
+			
+			for j in 1..p
+				loop
+					dbms_output.put(j);
+					dbms_output.put(' ');
+				end loop;
+			
+			for j in reverse 1..(p-1)
+				loop
+					dbms_output.put(j);
+					dbms_output.put(' ');
+				end loop;
+		
+		dbms_output.put_line('');
+		end loop;
+	
+		
+end;
+/
